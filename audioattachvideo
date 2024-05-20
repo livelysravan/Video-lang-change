@@ -1,0 +1,10 @@
+from moviepy.editor import VideoFileClip, AudioFileClip
+
+video_clip = VideoFileClip("original_video.mp4")
+
+translated_audio = AudioFileClip("translated_audio.wav")
+translated_audio = translated_audio.set_duration(video_clip.duration)
+
+video_clip = video_clip.set_audio(AudioClip.make_silence(duration=video_clip.duration))
+video_clip = video_clip.set_audio(translated_audio)
+video_clip.write_videofile("video_with_translated_audio.mp4", codec="libx264", audio_codec="aac")
